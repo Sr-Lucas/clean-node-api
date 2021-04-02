@@ -54,7 +54,7 @@
 
 > ## Bibliotecas e Ferramentas
 
-* NPM
+* Yarn
 * Typescript
 * Git
 * Docker
