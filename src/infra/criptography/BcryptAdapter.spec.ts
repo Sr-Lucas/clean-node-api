@@ -3,10 +3,9 @@ import { SALT } from './BcryptConstants'
 import { BcryptAdapter } from './BcryptAdapter'
 
 jest.mock('bcrypt', () => ({
-  async hash(): Promise<string> {
-    return await new Promise<string>((resolve) => {
-      resolve('hash')
-    })
+  // eslint-disable-next-line @typescript-eslint/promise-function-async
+  hash(value: string): Promise<string> {
+    return new Promise<string>((resolve) => resolve('hash'))
   }
 }))
 
