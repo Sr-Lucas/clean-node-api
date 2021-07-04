@@ -4,7 +4,10 @@ import { Express } from 'express'
 import { bodyParser } from '../middlewares/BodyParser'
 import { cors } from '../middlewares/Cors'
 
+const middlewares = [bodyParser, cors]
+
 export default (app: Express): void => {
-  app.use(bodyParser)
-  app.use(cors)
+  middlewares.forEach((middleware) => {
+    app.use(middleware)
+  })
 }
