@@ -1,9 +1,5 @@
 import { Express } from 'express'
-
-/** Middleware */
-import { bodyParser } from '../middlewares/BodyParser'
-import { cors } from '../middlewares/Cors'
-import { defaultContentType } from '../middlewares/ContentType'
+import { bodyParser, cors, defaultContentType } from '../middlewares'
 
 const middlewares = [bodyParser, cors, defaultContentType]
 
