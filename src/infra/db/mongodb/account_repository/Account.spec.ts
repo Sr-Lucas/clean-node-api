@@ -1,9 +1,11 @@
+require('dotenv/config')
+
 import MongoHelper from '../helpers/MongoHelper'
 import { AccountMongoRepository } from './Account'
 
 describe('Account Mongo Repository', () => {
   beforeAll(async () => {
-    await MongoHelper.connect()
+    await MongoHelper.connect(`${process.env.MONGODB_TEST_URL}`)
   })
 
   afterAll(async () => {

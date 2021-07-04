@@ -1,13 +1,11 @@
-require('dotenv/config')
-
 import { AccountModel } from '../../../../domain/models/Account'
 import { Collection, MongoClient } from 'mongodb'
 
 class MongoHelper {
   private client: MongoClient
 
-  async connect(): Promise<void> {
-    this.client = await MongoClient.connect(`${process.env.MONGODB_URL}`, {
+  async connect(uri: string): Promise<void> {
+    this.client = await MongoClient.connect(uri, {
       useNewUrlParser: true,
       useUnifiedTopology: true
     })

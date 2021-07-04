@@ -1,10 +1,12 @@
+require('dotenv/config')
+
 import request from 'supertest'
 import MongoHelper from '../../infra/db/mongodb/helpers/MongoHelper'
 import app from '../config/app'
 
 describe('Signup Routes', () => {
   beforeAll(async () => {
-    await MongoHelper.connect()
+    await MongoHelper.connect(`${process.env.MONGODB_TEST_URL}`)
   })
 
   afterAll(async () => {
