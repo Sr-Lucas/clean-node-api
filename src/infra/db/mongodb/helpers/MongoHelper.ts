@@ -1,7 +1,7 @@
 require('dotenv/config')
 
+import { AccountModel } from '../../../../domain/models/Account'
 import { Collection, MongoClient } from 'mongodb'
-import path from 'node:path'
 
 class MongoHelper {
   private client: MongoClient
@@ -19,6 +19,11 @@ class MongoHelper {
 
   getCollection(name: string): Collection {
     return this.client.db().collection(name)
+  }
+
+  mapUnderscoredId(result: any): AccountModel {
+    const { _id: id, ...resultWithoutId } = result
+    return { id, ...resultWithoutId }
   }
 }
 
