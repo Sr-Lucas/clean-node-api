@@ -1,14 +1,25 @@
-import { MongoClient } from 'mongodb'
+require('dotenv/config')
 
-export const MongoHelper = {
-  client: null as unknown as MongoClient,
-  async connect(uri: string): Promise<void> {
-    this.client = await MongoClient.connect(uri, {
+import { Collection, MongoClient } from 'mongodb'
+import path from 'node:path'
+
+class MongoHelper {
+  private client: MongoClient
+
+  async connect(): Promise<void> {
+    this.client = await MongoClient.connect(`${process.env.MONGODB_URL}`, {
       useNewUrlParser: true,
       useUnifiedTopology: true
     })
-  },
+  }
+
   async disconnect(): Promise<void> {
     await this.client.close()
   }
+
+  getCollection(name: string): Collection {
+    return this.client.db().collection(name)
+  }
 }
+
+export default new MongoHelper()
