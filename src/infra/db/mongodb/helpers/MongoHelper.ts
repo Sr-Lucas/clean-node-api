@@ -23,7 +23,6 @@ class MongoHelper {
 
   async getCollection(name: string): Promise<Collection | null> {
     if (!(this.client && this.client.isConnected())) {
-      console.log('entrou')
       if (!this.uri) throw new ServerError()
       await this.connect(this.uri)
     }
