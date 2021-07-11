@@ -10,6 +10,7 @@ import {
   HttpResponse
 } from '../../presentation/protocols'
 import { LoggerControllerDecorator } from '../decorators/Logger'
+import { LogMongoRepository } from '../../infra/db/mongodb/logger_repository/Logger'
 
 export const makeSignupController = (): Controller => {
   const emailValidatorAdapter = new EmailValidatorAdapter()
@@ -20,5 +21,6 @@ export const makeSignupController = (): Controller => {
     emailValidatorAdapter,
     dbAddAccount
   )
-  return new LoggerControllerDecorator(signUpController)
+  const logMongoResponse = new LogMongoRepository()
+  return new LoggerControllerDecorator(signUpController, logMongoResponse)
 }
