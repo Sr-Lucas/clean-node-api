@@ -48,4 +48,24 @@ describe('Logger Decorator', () => {
       }
     })
   })
+
+  test('should call controller handle method and return his httpResponse', async () => {
+    const { logControllerDecorator, controllerStub } = makeSut()
+    const httpResponse = await logControllerDecorator.handle({
+      body: {
+        name: 'any_name',
+        email: 'any@mail.com',
+        password: 'any_password',
+        confirmationPassword: 'any_password'
+      }
+    })
+    expect(httpResponse).toEqual({
+      statusCode: 200,
+      body: {
+        name: 'any_name',
+        email: 'any@mail.com',
+        password: 'any_password'
+      }
+    })
+  })
 })
