@@ -10,8 +10,8 @@ import { LogErrorRepository } from '../../data/protocols/LogErrorRepository'
 describe('Logger Decorator', () => {
   const makeLogErrorRepositoryStub = (): LogErrorRepository => {
     class LogErrorRepositoryStub implements LogErrorRepository {
-      async log(stack: string): Promise<void> {
-        return new Promise((resolve) => resolve())
+      async logError(stack: string): Promise<number> {
+        return new Promise((resolve) => resolve(1))
       }
     }
     return new LogErrorRepositoryStub()
@@ -93,7 +93,7 @@ describe('Logger Decorator', () => {
   test('should call LogErrorRepository with correct error if controller returns a server error', async () => {
     const { sut, controllerStub, logErrorRepositoryStub } = makeSut()
 
-    const logRepositorySpy = jest.spyOn(logErrorRepositoryStub, 'log')
+    const logRepositorySpy = jest.spyOn(logErrorRepositoryStub, 'logError')
 
     const error = new Error()
     error.stack = 'any_stack'
