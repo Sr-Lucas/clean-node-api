@@ -13,9 +13,6 @@ export class LoggerControllerDecorator implements Controller {
 
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     const httpResponse = await this.controller.handle(httpRequest)
-    return {
-      statusCode: 200,
-      body: {}
-    }
+    return httpResponse
   }
 }
